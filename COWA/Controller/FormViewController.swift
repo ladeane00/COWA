@@ -54,7 +54,7 @@ class FormViewController: UIViewController, UIPickerViewDataSource, UIPickerView
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        formNum = forms[row] as Int
+        formNum = forms[row]
     }
     
     //MARK: - Create Button Handling

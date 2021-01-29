@@ -317,7 +317,7 @@
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="16" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YPP-BO-MPu">
                                         <rect key="frame" x="30" y="166" width="518" height="358.5"/>
-                                        <mutableString key="text">This application was created by Lucas Deane. Lucas Deane is a member of the Villanova Class of 2023. He is majoring in Computer Science with a minor in Business. He plans on enrolling in the MS in Software Engineering program at Villanova to pursue his career as a software engineer. He is dedicated to finding solutions to all business-related problems through programmable solutions. He has experience in React, Javascript, Java, HTML/CSS, MySQL, Oracle, Swift, C, Excel, and the object-oriented programming concept in general. </mutableString>
+                                        <string key="text">This application was created by Lucas Deane. Lucas Deane is a member of the Villanova Class of 2023. He is majoring in Computer Science with a minor in Business. He plans on enrolling in the MS in Software Engineering program at Villanova to pursue his career as a software engineer. He is dedicated to finding solutions to all business-related problems through programmable solutions. He has experience in React, Javascript, Java, HTML/CSS, MySQL, Oracle, Swift, C, Excel, and the object-oriented programming concept in general. </string>
                                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -1012,7 +1012,7 @@
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <state key="normal" title="Home"/>
                                                 <connections>
-                                                    <segue destination="BYZ-38-t0r" kind="presentation" modalPresentationStyle="fullScreen" id="1Jl-hv-Uuf"/>
+                                                    <action selector="homeButtonPressed:" destination="dqo-Wn-06D" eventType="touchUpInside" id="XCF-7W-U5y"/>
                                                 </connections>
                                             </button>
                                         </barButtonItem>
@@ -1126,8 +1126,81 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hts-gb-IdQ" userLabel="Input View" customClass="CustomView" customModule="COWA" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="974" width="834" height="140"/>
                                 <subviews>
+                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fNT-9B-PsC" customClass="CustomView" customModule="COWA" customModuleProvider="target">
+                                        <rect key="frame" x="18" y="14" width="330" height="112"/>
+                                        <subviews>
+                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Qr3-fX-TXd">
+                                                <rect key="frame" x="8" y="8" width="176" height="46"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="BuR-4J-zvk">
+                                                    <size key="itemSize" width="38" height="38"/>
+                                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                </collectionViewFlowLayout>
+                                                <cells>
+                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Color Cell" id="Dm5-8P-lJb" userLabel="Color Cell">
+                                                        <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" tag="10" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="FLZ-DB-nx1" userLabel="Color View">
+                                                            <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </collectionViewCellContentView>
+                                                        <size key="customSize" width="38" height="38"/>
+                                                    </collectionViewCell>
+                                                </cells>
+                                            </collectionView>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LVB-Kx-Fbx">
+                                                <rect key="frame" x="241" y="17" width="26" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                                <color key="tintColor" red="0.2807969683" green="0.61147016359999995" blue="0.99684888120000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <state key="normal" title="Button">
+                                                    <imageReference key="image" image="arrowshape.turn.up.left.fill" catalog="system" symbolScale="large"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="onClickUndo:" destination="dqo-Wn-06D" eventType="touchUpInside" id="oV6-Lz-E86"/>
+                                                </connections>
+                                            </button>
+                                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="2.5" minValue="0.0" maxValue="7" translatesAutoresizingMaskIntoConstraints="NO" id="bs0-5f-4nA" userLabel="Width Slider">
+                                                <rect key="frame" x="41" y="71" width="279" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="tintColor" red="0.2807969683" green="0.61147016359999995" blue="0.99684888120000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <connections>
+                                                    <action selector="onClickBrushSize:" destination="dqo-Wn-06D" eventType="valueChanged" id="MzL-wA-GeJ"/>
+                                                </connections>
+                                            </slider>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="pencil.tip" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="TDX-o2-6xA">
+                                                <rect key="frame" x="8" y="72" width="27" height="27"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="tintColor" red="0.2807969683" green="0.61147016359999995" blue="0.99684888120000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            </imageView>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gIc-7v-d8n">
+                                                <rect key="frame" x="281" y="17" width="27" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="tintColor" red="0.2807969683" green="0.61147016359999995" blue="0.99684888120000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <state key="normal" title="Button">
+                                                    <imageReference key="image" image="arrowshape.turn.up.forward.fill" catalog="system" symbolScale="large"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="onClickRedo:" destination="dqo-Wn-06D" eventType="touchUpInside" id="dED-g9-xPJ"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="330" id="0d2-kU-yBp"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="2"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="22" translatesAutoresizingMaskIntoConstraints="NO" id="cAz-l3-fPo">
-                                        <rect key="frame" x="460.5" y="20" width="333.5" height="100"/>
+                                        <rect key="frame" x="371" y="20" width="333.5" height="100"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="FOk-6R-BgZ" userLabel="Responses Stack">
                                                 <rect key="frame" x="0.0" y="0.0" width="96.5" height="100"/>
@@ -1217,91 +1290,90 @@
                                             </stackView>
                                         </subviews>
                                     </stackView>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fNT-9B-PsC" customClass="CustomView" customModule="COWA" customModuleProvider="target">
-                                        <rect key="frame" x="40" y="14" width="330" height="112"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="19" translatesAutoresizingMaskIntoConstraints="NO" id="Vlr-WN-fsY">
+                                        <rect key="frame" x="721" y="18" width="100" height="104"/>
                                         <subviews>
-                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Qr3-fX-TXd">
-                                                <rect key="frame" x="8" y="8" width="176" height="46"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="BuR-4J-zvk">
-                                                    <size key="itemSize" width="38" height="38"/>
-                                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                </collectionViewFlowLayout>
-                                                <cells>
-                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Color Cell" id="Dm5-8P-lJb" userLabel="Color Cell">
-                                                        <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" tag="10" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="FLZ-DB-nx1" userLabel="Color View">
-                                                            <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
-                                                            <autoresizingMask key="autoresizingMask"/>
-                                                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        </collectionViewCellContentView>
-                                                        <size key="customSize" width="38" height="38"/>
-                                                    </collectionViewCell>
-                                                </cells>
-                                            </collectionView>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LVB-Kx-Fbx">
-                                                <rect key="frame" x="241" y="17" width="26" height="30"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                                <color key="tintColor" red="0.2807969683" green="0.61147016359999995" blue="0.99684888120000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                <state key="normal" title="Button">
-                                                    <imageReference key="image" image="arrowshape.turn.up.left.fill" catalog="system" symbolScale="large"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="onClickUndo:" destination="dqo-Wn-06D" eventType="touchUpInside" id="oV6-Lz-E86"/>
-                                                </connections>
-                                            </button>
-                                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="2.5" minValue="0.0" maxValue="7" translatesAutoresizingMaskIntoConstraints="NO" id="bs0-5f-4nA" userLabel="Width Slider">
-                                                <rect key="frame" x="41" y="71" width="279" height="30"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <color key="tintColor" red="0.2807969683" green="0.61147016359999995" blue="0.99684888120000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                <connections>
-                                                    <action selector="onClickBrushSize:" destination="dqo-Wn-06D" eventType="valueChanged" id="MzL-wA-GeJ"/>
-                                                </connections>
-                                            </slider>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="pencil.tip" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="TDX-o2-6xA">
-                                                <rect key="frame" x="8" y="72" width="27" height="27"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <color key="tintColor" red="0.2807969683" green="0.61147016359999995" blue="0.99684888120000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                            </imageView>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gIc-7v-d8n">
-                                                <rect key="frame" x="281" y="17" width="27" height="30"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <color key="tintColor" red="0.2807969683" green="0.61147016359999995" blue="0.99684888120000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                <state key="normal" title="Button">
-                                                    <imageReference key="image" image="arrowshape.turn.up.forward.fill" catalog="system" symbolScale="large"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="onClickRedo:" destination="dqo-Wn-06D" eventType="touchUpInside" id="dED-g9-xPJ"/>
-                                                </connections>
-                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Page 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TO2-V3-Gdd">
+                                                <rect key="frame" x="0.0" y="0.0" width="100" height="35"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="35" id="62f-xK-6hH"/>
+                                                    <constraint firstAttribute="width" constant="100" id="Rbp-NT-Tx7"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="VGu-jU-4m7">
+                                                <rect key="frame" x="10" y="54" width="80" height="50"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b2d-CE-lIc" customClass="CustomButton" customModule="COWA" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="35" height="50"/>
+                                                        <color key="backgroundColor" red="0.2807969683" green="0.61147016359999995" blue="0.99684888120000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="35" id="3ld-Tk-SAF"/>
+                                                            <constraint firstAttribute="height" constant="50" id="U2p-TH-2MG"/>
+                                                        </constraints>
+                                                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <state key="normal">
+                                                            <imageReference key="image" image="chevron.left" catalog="system" symbolScale="large"/>
+                                                        </state>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                <real key="value" value="0.0"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                <real key="value" value="2"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="backPagePressed:" destination="dqo-Wn-06D" eventType="touchUpInside" id="EWX-Eu-BPA"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rD9-mA-aFT" customClass="CustomButton" customModule="COWA" customModuleProvider="target">
+                                                        <rect key="frame" x="45" y="0.0" width="35" height="50"/>
+                                                        <color key="backgroundColor" red="0.2807969683" green="0.61147016359999995" blue="0.99684888120000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="35" id="MkL-Np-yQY"/>
+                                                            <constraint firstAttribute="height" constant="50" id="YEj-ff-zLB"/>
+                                                        </constraints>
+                                                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <state key="normal">
+                                                            <imageReference key="image" image="chevron.right" catalog="system" symbolScale="large"/>
+                                                        </state>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                <real key="value" value="0.0"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                <real key="value" value="2"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="nextPagePressed:" destination="dqo-Wn-06D" eventType="touchUpInside" id="nJU-Fw-Av0"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="330" id="0d2-kU-yBp"/>
-                                        </constraints>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                <real key="value" value="2"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </view>
+                                    </stackView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <accessibility key="accessibilityConfiguration" identifier="inputView"/>
                                 <constraints>
                                     <constraint firstItem="cAz-l3-fPo" firstAttribute="centerY" secondItem="hts-gb-IdQ" secondAttribute="centerY" id="LQn-1w-Ybl"/>
-                                    <constraint firstItem="fNT-9B-PsC" firstAttribute="leading" secondItem="hts-gb-IdQ" secondAttribute="leading" constant="40" id="ORq-xD-v5S"/>
                                     <constraint firstAttribute="height" constant="140" id="XWJ-dx-cF7"/>
                                     <constraint firstItem="cAz-l3-fPo" firstAttribute="top" secondItem="hts-gb-IdQ" secondAttribute="top" constant="20" id="XZp-NO-GDh"/>
                                     <constraint firstAttribute="bottom" secondItem="fNT-9B-PsC" secondAttribute="bottom" constant="14" id="fDv-qQ-60t"/>
                                     <constraint firstItem="fNT-9B-PsC" firstAttribute="top" secondItem="hts-gb-IdQ" secondAttribute="top" constant="14" id="gLZ-Co-uaL"/>
-                                    <constraint firstAttribute="trailing" secondItem="cAz-l3-fPo" secondAttribute="trailing" constant="40" id="kZ9-jv-2Y6"/>
+                                    <constraint firstAttribute="trailing" secondItem="Vlr-WN-fsY" secondAttribute="trailing" constant="13" id="jhj-9Q-imw"/>
                                     <constraint firstItem="fNT-9B-PsC" firstAttribute="centerY" secondItem="hts-gb-IdQ" secondAttribute="centerY" id="oDi-mj-SN2"/>
+                                    <constraint firstItem="Vlr-WN-fsY" firstAttribute="leading" secondItem="cAz-l3-fPo" secondAttribute="trailing" constant="16.5" id="pSb-nf-YKR"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
@@ -1358,11 +1430,13 @@ S: super super-duper supper something sandwich sturky Sacramento silly sink sync
                             <constraint firstItem="R2i-eM-LbQ" firstAttribute="leading" secondItem="yLi-xf-KYL" secondAttribute="leading" id="aUI-h8-9ax"/>
                             <constraint firstAttribute="trailing" secondItem="hts-gb-IdQ" secondAttribute="trailing" id="awW-2X-v7V"/>
                             <constraint firstItem="hts-gb-IdQ" firstAttribute="top" secondItem="ChG-iE-uR8" secondAttribute="bottom" id="jTD-fx-p63"/>
+                            <constraint firstItem="Vlr-WN-fsY" firstAttribute="top" secondItem="ChG-iE-uR8" secondAttribute="bottom" constant="18" id="kZd-0e-VYK"/>
                             <constraint firstItem="ChG-iE-uR8" firstAttribute="leading" secondItem="yLi-xf-KYL" secondAttribute="leading" id="nv1-uh-iYS"/>
                             <constraint firstItem="xqg-Fb-kb5" firstAttribute="top" secondItem="yLi-xf-KYL" secondAttribute="top" id="q5o-cr-ZbG"/>
                             <constraint firstItem="R2i-eM-LbQ" firstAttribute="centerX" secondItem="Mae-zd-qrg" secondAttribute="centerX" id="vPB-8f-Efl"/>
                             <constraint firstItem="hts-gb-IdQ" firstAttribute="leading" secondItem="yLi-xf-KYL" secondAttribute="leading" id="xCl-6D-ekz"/>
                             <constraint firstItem="ChG-iE-uR8" firstAttribute="trailing" secondItem="yLi-xf-KYL" secondAttribute="trailing" id="ydf-EA-o3d"/>
+                            <constraint firstItem="UCS-ub-ilm" firstAttribute="top" secondItem="Vlr-WN-fsY" secondAttribute="bottom" constant="18" id="zfq-ug-zrF"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Title" id="zSR-SA-UkW"/>
@@ -1372,18 +1446,22 @@ S: super super-duper supper something sandwich sturky Sacramento silly sink sync
                         <outlet property="editButton" destination="GDS-zd-PPb" id="k1n-84-60u"/>
                         <outlet property="errorLabel" destination="TRS-Mp-DnN" id="lKV-iD-G3i"/>
                         <outlet property="errorStepper" destination="mBT-8P-b9R" id="Gav-ei-9iq"/>
+                        <outlet property="homeButton" destination="jyw-cI-B1v" id="soz-QW-gHw"/>
                         <outlet property="infoLabel" destination="NBZ-SI-NfA" id="jxx-ho-aUh"/>
                         <outlet property="navBar" destination="xqg-Fb-kb5" id="5pN-do-c7o"/>
+                        <outlet property="pageLabel" destination="TO2-V3-Gdd" id="CF2-jp-o5u"/>
                         <outlet property="responseLabel" destination="Kfn-zl-znD" id="WBd-Vi-sVn"/>
                         <outlet property="responseStepper" destination="k5r-fx-OsK" id="KNq-aF-evC"/>
                         <outlet property="stateController" destination="R2i-eM-LbQ" id="I2b-DV-vHk"/>
                         <outlet property="timerLabel" destination="gKB-77-eHK" id="lnZ-wb-uDI"/>
                         <outlet property="totalLabel" destination="x7F-At-0Gj" id="S8u-fB-a1a"/>
+                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="panelToHome" modalPresentationStyle="fullScreen" id="1Zf-gf-tft"/>
+                        <segue destination="lrb-IB-LDW" kind="presentation" identifier="panelToAssess" modalPresentationStyle="fullScreen" id="gc6-2k-re8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wte-mt-kva" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2123.741007194245" y="-627.6381909547739"/>
+            <point key="canvasLocation" x="2020.8633093525182" y="-478.391959798995"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="sOX-6E-1YK">
@@ -1471,6 +1549,9 @@ S: super super-duper supper something sandwich sturky Sacramento silly sink sync
         <designable name="ajJ-2e-uVm">
             <size key="intrinsicContentSize" width="47" height="39"/>
         </designable>
+        <designable name="b2d-CE-lIc">
+            <size key="intrinsicContentSize" width="14.5" height="22"/>
+        </designable>
         <designable name="c2N-Pj-xHc">
             <size key="intrinsicContentSize" width="227" height="39"/>
         </designable>
@@ -1480,17 +1561,23 @@ S: super super-duper supper something sandwich sturky Sacramento silly sink sync
         <designable name="k0A-Ir-r99">
             <size key="intrinsicContentSize" width="79" height="60"/>
         </designable>
+        <designable name="rD9-mA-aFT">
+            <size key="intrinsicContentSize" width="14.5" height="22"/>
+        </designable>
         <designable name="sI4-b4-MOS">
             <size key="intrinsicContentSize" width="96" height="42"/>
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
         <segue reference="mi7-Oa-HM2"/>
-        <segue reference="IDK-wI-rXF"/>
+        <segue reference="gc6-2k-re8"/>
+        <segue reference="1Zf-gf-tft"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="arrowshape.turn.up.forward.fill" catalog="system" width="128" height="106"/>
         <image name="arrowshape.turn.up.left.fill" catalog="system" width="128" height="106"/>
+        <image name="chevron.left" catalog="system" width="96" height="128"/>
+        <image name="chevron.right" catalog="system" width="96" height="128"/>
         <image name="pencil.tip" catalog="system" width="99" height="128"/>
         <image name="profile" width="636" height="636"/>
         <systemColor name="systemBackgroundColor">

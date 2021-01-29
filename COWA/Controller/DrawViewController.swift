@@ -17,6 +17,8 @@ class DrawViewController: UIViewController {
     @IBOutlet weak var errorLabel: UILabel!
     @IBOutlet weak var totalLabel: UILabel!
     @IBOutlet weak var timerLabel: UILabel!
+    @IBOutlet weak var pageLabel: UILabel!
+    
     
     @IBOutlet weak var responseStepper: UIStepper!
     @IBOutlet weak var errorStepper: UIStepper!
@@ -28,6 +30,7 @@ class DrawViewController: UIViewController {
     @IBOutlet weak var navBar: UINavigationBar!
     
     @IBOutlet weak var editButton: CustomButton!
+    @IBOutlet weak var homeButton: UIButton!
     
     
     var formOne = ["INSTRUCTIONS", "F", "A", "S"]
@@ -50,12 +53,16 @@ class DrawViewController: UIViewController {
             assessment = currentAssessment
             editButton.isHidden = true
             editButton.isEnabled = false
+            homeButton.setTitle("Home", for: .normal)
+            
         } else if (detailMode) {
             assessment = detailAssessment
             editButton.isHidden = false
             editButton.isEnabled = true
+            homeButton.setTitle("Back", for: .normal)
         } else {
             print("Something went wrong with assessment handling.")
+            homeButton.setTitle("Back", for: .normal)
         }
         
         navBar.topItem?.title = "AID: \(master[assessment].AID)"
@@ -91,6 +98,9 @@ class DrawViewController: UIViewController {
     @IBAction func stateControllerPressed(_ sender: UISegmentedControl) {
         let selected = sender.selectedSegmentIndex
         state = currentForm[selected]
+        pageNumber = 1
+        updatePageLabel()
+        
         if state != "INSTRUCTIONS" {
             infoLabel.isHidden = true
         } else {
@@ -114,8 +124,8 @@ class DrawViewController: UIViewController {
             totalLabel.text = String(master[assessment].T1T)
             
             canvasView.canDraw = true
-            canvasView.lines = master[assessment].lines1
-            canvasView.tempLines = master[assessment].tempLines1
+            canvasView.lines = master[assessment].lines1[pageNumber - 1]
+            canvasView.tempLines = master[assessment].tempLines1[pageNumber - 1]
             canvasView.setNeedsDisplay()
         case 2:
             responseStepper.value = Double(master[assessment].T2R)
@@ -125,8 +135,8 @@ class DrawViewController: UIViewController {
             totalLabel.text = String(master[assessment].T2T)
             
             canvasView.canDraw = true
-            canvasView.lines = master[assessment].lines2
-            canvasView.tempLines = master[assessment].tempLines2
+            canvasView.lines = master[assessment].lines2[pageNumber - 1]
+            canvasView.tempLines = master[assessment].tempLines2[pageNumber - 1]
             canvasView.setNeedsDisplay()
         case 3:
             responseStepper.value = Double(master[assessment].T3R)
@@ -136,8 +146,8 @@ class DrawViewController: UIViewController {
             totalLabel.text = String(master[assessment].T3T)
             
             canvasView.canDraw = true
-            canvasView.lines = master[assessment].lines3
-            canvasView.tempLines = master[assessment].tempLines3
+            canvasView.lines = master[assessment].lines3[pageNumber - 1]
+            canvasView.tempLines = master[assessment].tempLines3[pageNumber - 1]
             canvasView.setNeedsDisplay()
         default:
             print("Something failed here with assigning drawing view page values.")
@@ -302,12 +312,116 @@ class DrawViewController: UIViewController {
         } else {
             ableToEdit = false
         }
-        if (editButton.borderColor != .green) {
-            editButton.borderColor = .green
+        if (editButton.borderColor != .red) {
+            editButton.borderColor = .red
         } else {
             editButton.borderColor = .black
         }
         editButton.isHighlighted = !editButton.isHighlighted
+    }
+    
+    @IBAction func homeButtonPressed(_ sender: UIButton) {
+        if (normalMode) {
+            performSegue(withIdentifier: "panelToHome", sender: self)
+        } else {
+            performSegue(withIdentifier: "panelToAssess", sender: self)
+        }
+    }
+    
+    
+    @IBAction func backPagePressed(_ sender: CustomButton) {
+        //back a page
+        if ((state != currentForm[0]) && pageNumber <= 1) {
+            pageNumber = 1
+            switch state {
+            case currentForm[1]:
+                canvasView.lines = master[assessment].lines1[pageNumber - 1]
+                canvasView.tempLines = master[assessment].tempLines1[pageNumber - 1]
+                canvasView.setNeedsDisplay()
+            case currentForm[2]:
+                canvasView.lines = master[assessment].lines2[pageNumber - 1]
+                canvasView.tempLines = master[assessment].tempLines2[pageNumber - 1]
+                canvasView.setNeedsDisplay()
+            case currentForm[3]:
+                canvasView.lines = master[assessment].lines3[pageNumber - 1]
+                canvasView.tempLines = master[assessment].tempLines3[pageNumber - 1]
+                canvasView.setNeedsDisplay()
+            default:
+                print("Something went wrong with page selection")
+            }
+        } else if ((state != currentForm[0]) && pageNumber > 1) {
+            pageNumber -= 1
+            switch state {
+            case currentForm[1]:
+                canvasView.lines = master[assessment].lines1[pageNumber - 1]
+                canvasView.tempLines = master[assessment].tempLines1[pageNumber - 1]
+                canvasView.setNeedsDisplay()
+            case currentForm[2]:
+                canvasView.lines = master[assessment].lines2[pageNumber - 1]
+                canvasView.tempLines = master[assessment].tempLines2[pageNumber - 1]
+                canvasView.setNeedsDisplay()
+            case currentForm[3]:
+                canvasView.lines = master[assessment].lines3[pageNumber - 1]
+                canvasView.tempLines = master[assessment].tempLines3[pageNumber - 1]
+                canvasView.setNeedsDisplay()
+            default:
+                print("Something went wrong with page selection")
+            }
+        } else {
+            pageNumber = 1
+        }
+        
+        
+        updatePageLabel()
+        
+    }
+    
+    @IBAction func nextPagePressed(_ sender: CustomButton) {
+        //forward a page
+        if ((state != currentForm[0]) && pageNumber >= 3) {
+            pageNumber = 3
+            switch state {
+            case currentForm[1]:
+                canvasView.lines = master[assessment].lines1[pageNumber - 1]
+                canvasView.tempLines = master[assessment].tempLines1[pageNumber - 1]
+                canvasView.setNeedsDisplay()
+            case currentForm[2]:
+                canvasView.lines = master[assessment].lines2[pageNumber - 1]
+                canvasView.tempLines = master[assessment].tempLines2[pageNumber - 1]
+                canvasView.setNeedsDisplay()
+            case currentForm[3]:
+                canvasView.lines = master[assessment].lines3[pageNumber - 1]
+                canvasView.tempLines = master[assessment].tempLines3[pageNumber - 1]
+                canvasView.setNeedsDisplay()
+            default:
+                print("Something went wrong with page selection")
+            }
+        } else if ((state != currentForm[0]) && pageNumber < 3) {
+            pageNumber += 1
+            switch state {
+            case currentForm[1]:
+                canvasView.lines = master[assessment].lines1[pageNumber - 1]
+                canvasView.tempLines = master[assessment].tempLines1[pageNumber - 1]
+                canvasView.setNeedsDisplay()
+            case currentForm[2]:
+                canvasView.lines = master[assessment].lines2[pageNumber - 1]
+                canvasView.tempLines = master[assessment].tempLines2[pageNumber - 1]
+                canvasView.setNeedsDisplay()
+            case currentForm[3]:
+                canvasView.lines = master[assessment].lines3[pageNumber - 1]
+                canvasView.tempLines = master[assessment].tempLines3[pageNumber - 1]
+                canvasView.setNeedsDisplay()
+            default:
+                print("Something went wrong with page selection")
+            }
+        } else {
+            pageNumber = 1
+        }
+        updatePageLabel()
+    }
+    
+    func updatePageLabel() {
+        pageLabel.text = "Page: \(pageNumber)"
     }
     
 
@@ -366,6 +480,8 @@ extension DrawViewController: UICollectionViewDelegate, UICollectionViewDataSour
 
 /*
 // MARK: - Navigation
+ 
+ 
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

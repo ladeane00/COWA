@@ -89,14 +89,14 @@ class CanvasView: UIView {
         case currentForm[0]:
             print("intructions page")
         case currentForm[1]:
-            master[assessment].lines1 = lines
-            master[assessment].tempLines1 = tempLines
+            master[assessment].lines1[pageNumber - 1] = lines
+            master[assessment].tempLines1[pageNumber - 1] = tempLines
         case currentForm[2]:
-            master[assessment].lines2 = lines
-            master[assessment].tempLines2 = tempLines
+            master[assessment].lines2[pageNumber - 1] = lines
+            master[assessment].tempLines2[pageNumber - 1] = tempLines
         case currentForm[3]:
-            master[assessment].lines3 = lines
-            master[assessment].tempLines3 = tempLines
+            master[assessment].lines3[pageNumber - 1] = lines
+            master[assessment].tempLines3[pageNumber - 1] = tempLines
         default:
             print("canvas updating bad")
         }

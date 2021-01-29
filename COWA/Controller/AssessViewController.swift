@@ -106,19 +106,33 @@ class AssessViewController: UIViewController, UITableViewDelegate, UITableViewDa
     // Override to support editing the table view.
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
             if editingStyle == .delete {
-                for i in 0...(master.count - 1) {
-                    let cell = tableView.cellForRow(at: indexPath) as! AssessCell?
-                    if cell?.AIDLabel.text == "AID: \(master[i].AID)" {
-                        master.remove(at: i)
-                        break
-                    } else {
-                        print("Something went wrong with cell deletion")
+                let exportAlert = UIAlertController(title: "Deletion", message: "Are you sure you want to delete this row?", preferredStyle: UIAlertController.Style.alert)
+
+                exportAlert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { [self] (action: UIAlertAction!) in
+                
+                    for i in 0...(master.count - 1) {
+                        let cell = tableView.cellForRow(at: indexPath) as! AssessCell?
+                        if cell?.AIDLabel.text == "AID: \(master[i].AID)" {
+                            master.remove(at: i)
+                            break
+                        } else {
+                            print("Something went wrong with cell deletion")
+                        }
                     }
-                }
-                if (isSearching) {
-                    filteredAss.remove(at: indexPath.item)
-                }
-                tableView.deleteRows(at: [indexPath], with: .fade)
+                    if (isSearching) {
+                        filteredAss.remove(at: indexPath.item)
+                    }
+                    tableView.deleteRows(at: [indexPath], with: .fade)
+                
+                }))
+
+                exportAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
+                      print("Chose cancel with export")
+                }))
+
+                present(exportAlert, animated: true, completion: nil)
+                updateTable()
+                tableView.reloadData()
         }
     }
     
@@ -223,36 +237,29 @@ class AssessViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         //EXPORT CODE
                     
                     let tmpDir = FileManager.default.temporaryDirectory
-                    var fileURLs : [URL] = []
+                    var fileURL : URL
+                    let fileName = "test.csv"
+                    fileURL = tmpDir.appendingPathComponent(fileName)
+                    var str = "sid, assess_id, redcap_event_name, redcap_repeat_instrument, redcap_repeat_instance, redcap_data_access_group, redcap_survey_identifier, cowa_t1r, cowa_t1e, cowa_t1c, cowa_t2r, cowa_t2e, cowa_t2c, cowa_t3r, cowa_t3e, cowa_t3c, cowa_sumr, cowa_sume, cowa_sumc, cowa_form"
                     
                     for cell in cells {
                         if cell.accessoryType == UITableViewCell.AccessoryType.checkmark {
-                            let title = cell.AIDLabel.text
-                            var fileNameTitle = ""
-                            count = 0
-                            for s in title! {
-                                if (count > 4) {
-                                    fileNameTitle.append(s)
-                                }
-                                count += 1
-                            }
-                            let fileName = "\(fileNameTitle).txt"
-                            fileURLs.append(tmpDir.appendingPathComponent(fileName))
-                            var str = ""
                             for ass in master {
                                 if cell.AIDLabel.text == "AID: \(ass.AID)" {
-                                    str = "AID: \(ass.AID) \nSID: \(ass.SID) \nVisit Num: \(ass.visitNum) \nVisit Date: \(ass.visitDate) \nForm Num: \(ass.formNum) \nT1R: \(ass.T1R) \nT1E: \(ass.T1E) \nT1T: \(ass.T1T) \nT2R: \(ass.T2R) \nT2E: \(ass.T2E) \nT2T: \(ass.T2T) \nT3R: \(ass.T3R) \nT3E: \(ass.T3E) \nT3T: \(ass.T3T) \nsumR: \(ass.sumR) \nsumE: \(ass.sumE) \nsumT: \(ass.sumT)"
+                                    print(ass.formNum)
+                                    str.append("\n\(ass.SID), \(ass.AID), visit_data_arm_1, , \(ass.visitNum), uihc, , \(ass.T1R), \(ass.T1E), \(ass.T1T), \(ass.T2R), \(ass.T2E), \(ass.T2T), \(ass.T3R), \(ass.T3E), \(ass.T3T), \(ass.sumR), \(ass.sumE), \(ass.sumT), \(ass.formNum)")
                                 }
-                            }
-                            do {
-                                try str.write(to: fileURLs[fileURLs.count - 1], atomically: false, encoding: .utf8)
-                            } catch {
-                                print(error)
                             }
                         }
                     }
                     
-                    let activityController = UIActivityViewController(activityItems: fileURLs, applicationActivities: nil)
+                    do {
+                        try str.write(to: fileURL, atomically: false, encoding: .utf8)
+                    } catch {
+                        print(error)
+                    }
+                    
+                    let activityController = UIActivityViewController(activityItems: [fileURL], applicationActivities: nil)
                     
                     if let popoverController = activityController.popoverPresentationController {
                         popoverController.sourceRect = CGRect(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height / 2, width: 0, height: 0)
